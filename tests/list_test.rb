@@ -4,8 +4,8 @@ require './lib/list'
 
 class ListTests < Minitest::Test
 
-  def test_there_is_a_linked_list_class
-    skip
+  def test_you_can_create_new_nodes
+    assert LinkedList.new.new_node
   end
 
 end

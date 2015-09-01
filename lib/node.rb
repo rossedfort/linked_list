@@ -1,7 +1,12 @@
 class Node
-  def initialize(value, pointer)
-    node = Node.new(value, pointer)
+
+attr_accessor :data
+
+  def initialize(data)
+    @data = data
+    @next = nil
   end
+
 end
 
-Node.new(0,0)
+# Node.new("ross")
