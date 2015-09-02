@@ -8,8 +8,16 @@ class LinkedList #create the list
     @node = node              # => nil
   end
 
-end
+  def append(data)
+    if node.nil?
+      node = Node.new(data)
+    else
+      current_node = @node
+      while current_node.pointer
+        current_node = current_node.pointer
+      end
+      current_node.pointer = Node.new(data)
+    end
+  end
 
-# def tail?
-#   @node.data.nil?
-# end
+end

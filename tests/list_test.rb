@@ -23,8 +23,12 @@ class ListTests < Minitest::Test
     assert_equal node, list.node
   end
 
-  # def test_append # add an element to the end of the list
-  # end
+  def test_append # add an element to the end of the list
+    list = LinkedList.new(Node.new("a"))
+    new_list = list.append(Node.new("b"))
+    assert new_list.data, "b"
+  end
+
   # def prepend # add an element at the beginning of the list
   # end
   # def insert # put an element at an arbitrary position in the list
