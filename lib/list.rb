@@ -1,20 +1,20 @@
-require_relative 'node'
+require_relative 'node'  # => true
 
 class LinkedList
   def initialize
-    @head = Node.new
+    @head = Node.new  # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>
   end
 
-  def head_data
-    @head.pointer.data
+  def return_head
+    @head.pointer.data  # => "a"
   end
 
   def find_tail
-    current = @head
-    until current.pointer.nil?
-      current = current.pointer
-    end
-    current
+    current = @head              # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>, #<Node:0x007fecd4889e38 @data=nil, @pointer=#<Node:0x007fecd4889a28 @data="a", @pointer=nil>>
+    until current.pointer.nil?   # => true, false, true
+      current = current.pointer  # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
+    end                          # => nil, nil
+    current                      # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>, #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
   end
 
   def tail_data
@@ -29,9 +29,9 @@ class LinkedList
   end
 
   def append(data)
-    data
-    new_node = Node.new(data)
-    find_tail.pointer = new_node
+    data                          # => "a", "b"
+    new_node = Node.new(data)     # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>, #<Node:0x007fecd4889190 @data="b", @pointer=nil>
+    find_tail.pointer = new_node  # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>, #<Node:0x007fecd4889190 @data="b", @pointer=nil>
   end
 
   def find(data)
@@ -43,24 +43,9 @@ class LinkedList
     nil
   end
 
-  # def insert(data, position)
-  #   new_node = Node.new("a")
-  #   new_node.data
-  # end
-
-  def inspect
-    "#<List: #{@head.inspect}>"
-  end
-
  end
 
- list = LinkedList.new
- list.append("a")
- list.inspect
- list.append("b")
- list
- list.append("c")
- list
-
-
-#<List "a"->"b"->"c">
+list = LinkedList.new  # => #<LinkedList:0x007fecd4889e60 @head=#<Node:0x007fecd4889e38 @data=nil, @pointer=nil>>
+list.append("a")       # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
+list.append("b")       # => #<Node:0x007fecd4889190 @data="b", @pointer=nil>
+list.return_head       # => "a"

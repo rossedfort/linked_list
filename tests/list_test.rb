@@ -65,9 +65,14 @@ class ListTests < Minitest::Test
   #   assert 2, new_list.count
   # end
 
-  # def return_head # return the head value at the beginning of the list
-  # end
-  #
+  def test_return_head
+    list = LinkedList.new
+    list.append("a")
+    list.append("b")
+    head = list.return_head
+    assert_equal "a", head
+  end
+
   # def return_tail # return the tail value at the end of the list
   # end
   #

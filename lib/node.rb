@@ -6,11 +6,4 @@ attr_accessor :data, :pointer
     @data = data
     @pointer = pointer
   end
-  def inspect
-    if @pointer == nil
-      "#{data.inspect}"
-    else
-      "#{data.inspect} -> #{pointer.inspect}"
-    end
-  end
 end
