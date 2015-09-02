@@ -9,6 +9,10 @@ class ListTests < Minitest::Test
     assert Node.new("a")
   end
 
+  def test_nodes_take_a_paramter
+    assert_equal "a", Node.new("a").data
+  end
+
   def test_you_can_create_a_nil_head
     assert_equal nil, LinkedList.new.node
   end
@@ -23,10 +27,11 @@ class ListTests < Minitest::Test
     assert_equal node, list.node
   end
 
-  def test_append # add an element to the end of the list
+  def test_append_an_element_to_the_end_of_the_list
     list = LinkedList.new(Node.new("a"))
-    new_list = list.append(Node.new("b"))
-    assert new_list.data, "b"
+    node = Node.new("b")
+    new_list = list.append(node)
+    assert_equal node, new_list.data
   end
 
   # def prepend # add an element at the beginning of the list
@@ -38,13 +43,21 @@ class ListTests < Minitest::Test
   #   node = Node.new("a")
   #   list = LinkedList.new(node)
   # end
-  #
-  # def pop # removes an element from the end of the list
+
+  def test_pop_an_element_from_the_end_of_the_list
+    list = LinkedList.new(Node.new("a"))
+    node = Node.new("b")
+    new_list = list.append(node)
+    list.remove(node)
+    assert_equal node, new_list.data
+  end
+
+  # def test_count_the_number_of_elements_in_the_list
+  #   list = LinkedList.new(Node.new("a"))
+  #   new_list = list.append(Node.new("b"))
+  #   assert 2, new_list.count
   # end
-  #
-  # def count # count the number of elements in the list
-  # end
-  #
+
   # def return_head # return the head value at the beginning of the list
   # end
   #
@@ -53,10 +66,14 @@ class ListTests < Minitest::Test
   #
   # def find_by_index # find the value at a numeric position
   # end
-  #
-  # def find_by_value # find_by_value finds the position of the first occurrence of a value
-  # end
-  #
+
+  def test_find_by_value # find_by_value finds the position of the first occurrence of a value
+    node = Node.new("a")
+    list = LinkedList.new(node)
+    found = list.find("a")
+    assert_equal node, found
+  end
+
   # def remove_by_index # remove_by_index removes the value at the specified index
   # end
   #
