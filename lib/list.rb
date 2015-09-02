@@ -1,55 +1,45 @@
-require_relative 'node'
+require './lib/node'
 
 class LinkedList
+  def initialize
+     @head = Node.new
+   end
 
-  attr_reader :node
+   def head_data
+     @head.pointer.data
+   end
 
-  def initialize(node = nil)
-    @node = node
-  end
+   def find_tail
+     current = @head
+     until current.pointer.nil?
+       current = current.pointer
+     end
+     current
+   end
 
-  def tail?
-    @node.data.nil?
-  end
+   def tail_data
+     find_tail.data
+   end
 
-  def append(data)
-    if node.nil?
-      node = Node.new(data)
-    else
-      current_node = @node
-      while current_node.pointer
-        current_node = current_node.pointer
-      end
-      current_node.pointer = Node.new(data)
-    end
-  end
+   def prepend(data)
+     node = Node.new(data)
+     first_node = @head.pointer
+     @head.pointer = node
+     node.pointer = first_node
+   end
 
-  def remove(data)
-    if node.data == data
-      node = node.pointer
-    else
-      current_node = node
-      prev_node = node
-      while current_node
-        if current_node.data == data
-          prev_node.pointer = current_node.pointer
-          return true
-        end
-        prev_node = current_node
-        current_node = current_node.pointer
-      end
-      nil
-    end
-  end
+   def append(data)
+     new_node = Node.new(data)
+     find_tail.pointer = new_node
+   end
 
-  def find(data)
-    current_node = node
-    while current_node != nil
-      return current_node if current_node.data == data
-      current_node = current_node.pointer
-    end
-    nil
-  end
+   def find(data)
+     current_node = node
+     while current_node != nil
+       return current_node if current_node.data == data
+       current_node = current_node.pointer
+     end
+     nil
+   end
 
-
-end
+ end
