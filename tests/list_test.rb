@@ -14,28 +14,34 @@ class ListTests < Minitest::Test
   end
 
   def test_you_can_create_a_nil_head
-    assert_equal nil, LinkedList.new.node
+    assert_equal nil, Node.new.pointer
   end
 
   def test_you_can_create_a_list
-    assert LinkedList.new(nil)
-  end
-
-  def test_you_can_create_a_list_with_a_node
-    node = Node.new("a")
-    list = LinkedList.new(node)
-    assert_equal node, list.node
+    assert LinkedList.new
   end
 
   def test_append_an_element_to_the_end_of_the_list
-    list = LinkedList.new(Node.new("a"))
-    node = Node.new("b")
-    new_list = list.append(node)
-    assert_equal node, new_list.data
+    list = LinkedList.new
+    list.append("a")
+    list.append("b")
+    assert_equal "b", list.tail_data
   end
 
-  # def prepend # add an element at the beginning of the list
-  # end
+  def test_prepend_add_an_element_at_the_beginning_of_the_list
+    list = LinkedList.new
+    list.append("a")
+    list.prepend("b")
+    assert_equal "a", list.tail_data
+  end
+
+  def test_to_append_node_to_existing_list
+   list = LinkedList.new
+   list.append('tyler')
+   list.append('jeff')
+   assert_equal 'jeff', list.tail_data
+ end
+
   # def insert # put an element at an arbitrary position in the list
   # end
   #
@@ -45,7 +51,8 @@ class ListTests < Minitest::Test
   # end
 
   def test_pop_an_element_from_the_end_of_the_list
-    list = LinkedList.new(Node.new("a"))
+    skip
+    list = LinkedList.new
     node = Node.new("b")
     new_list = list.append(node)
     list.remove(node)
@@ -68,10 +75,9 @@ class ListTests < Minitest::Test
   # end
 
   def test_find_by_value # find_by_value finds the position of the first occurrence of a value
-    node = Node.new("a")
-    list = LinkedList.new(node)
-    found = list.find("a")
-    assert_equal node, found
+    list = LinkedList.new()
+    found = list.append("a")
+    assert_equal "a", found.data
   end
 
   # def remove_by_index # remove_by_index removes the value at the specified index
