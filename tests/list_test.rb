@@ -35,31 +35,31 @@ class ListTests < Minitest::Test
     assert_equal "a", list.tail_data
   end
 
-  def test_to_append_node_to_existing_list
-   list = LinkedList.new
-   list.append('tyler')
-   list.append('jeff')
-   assert_equal 'jeff', list.tail_data
- end
 
-  # def insert # put an element at an arbitrary position in the list
-  # end
-  #
-  # def test_includes? # gives back true or false whether the supplied value is in the list
-  #   node = Node.new("a")
-  #   list = LinkedList.new(node)
-  # end
-
-  def test_pop_an_element_from_the_end_of_the_list
-    skip
+  def test_includes?
     list = LinkedList.new
-    node = Node.new("b")
-    new_list = list.append(node)
-    list.remove(node)
-    assert_equal node, new_list.data
+    list.append(Node.new("a"))
+    assert_equal "a", list.tail_data.data
   end
 
+  def test_find_by_value
+    list = LinkedList.new()
+    list.append("a")
+    found = list.find("a")
+    assert_equal "a", found.data
+  end
+
+  # def test_pop_an_element_from_the_end_of_the_list
+  #   skip
+  #   list = LinkedList.new
+  #   node = Node.new("b")
+  #   new_list = list.append(node)
+  #   list.remove(node)
+  #   assert_equal node, new_list.data
+  # end
+
   # def test_count_the_number_of_elements_in_the_list
+  #   skip
   #   list = LinkedList.new(Node.new("a"))
   #   new_list = list.append(Node.new("b"))
   #   assert 2, new_list.count
@@ -73,12 +73,6 @@ class ListTests < Minitest::Test
   #
   # def find_by_index # find the value at a numeric position
   # end
-
-  def test_find_by_value # find_by_value finds the position of the first occurrence of a value
-    list = LinkedList.new()
-    found = list.append("a")
-    assert_equal "a", found.data
-  end
 
   # def remove_by_index # remove_by_index removes the value at the specified index
   # end
