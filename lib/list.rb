@@ -1,8 +1,8 @@
-require_relative 'node'  # => true
+require_relative 'node'
 
 class LinkedList
 
-attr_reader :head  # => nil
+attr_reader :head
 
   def empty?
     @head == nil
@@ -31,20 +31,29 @@ attr_reader :head  # => nil
   end
 
   def append(data)
-    new_node = Node.new(data)     # => #<Node:0x007fda7b83ae48 @data="a", @next_node=nil>, #<Node:0x007fda7b83a628 @data="b", @next_node=nil>
-    if new_node.next_node == nil  # => true, true
-      @head = new_node            # => #<Node:0x007fda7b83ae48 @data="a", @next_node=nil>, #<Node:0x007fda7b83a628 @data="b", @next_node=nil>
-      new_node.next_node = @head  # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>, #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
-    end                           # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>, #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
+    new_node = Node.new(data)
+    if new_node.next_node == nil
+      @head = new_node
+      new_node.next_node = @head
+    end
   end
 
-  def find(data)
+  def find_value(data)
     current = Node.new(data)
     while current != nil
       return current if current.data == data
       current = current.next_node
     end
     nil
+  end
+
+  def remove_value(data)
+    return nil if empty?
+    if @head.data == data
+      deleted = @head
+      @head = @head.next_node
+    end
+    deleted.data
   end
 
   def count
@@ -70,10 +79,24 @@ attr_reader :head  # => nil
     node.next_node = first_node
   end
 
- end
+  def find_index(position, data)
+    node = Node.new(data)
+    position = 0
+    while @head != nil
+      @head = node.next_node
+      new_node = node
+    end
+    position += 1
+    node
+  end
 
-list = LinkedList.new  # => #<LinkedList:0x007fda7b83af88>
-list.append("a")       # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>
-list.append("b")       # => #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
+  def remove_index(position, data)
+    node = Node.new(data)
+    while @head != nil
+      @head = node.next_node
+      removed = node
+    end
+    removed.data
+  end
 
-list  # => #<LinkedList:0x007fda7b83af88 @head=#<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>>
+end

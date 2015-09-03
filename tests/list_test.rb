@@ -23,7 +23,7 @@ class ListTests < Minitest::Test
 
   def test_append_an_element_to_the_end_of_the_list
     list = LinkedList.new
-    list.prepend("b")
+    list.append("b")
     list.append("a")
     assert_equal "a", list.head
   end
@@ -37,22 +37,16 @@ class ListTests < Minitest::Test
 
   def test_includes?
     list = LinkedList.new
-    list.prepend(Node.new("a"))
-    assert_equal "a", list.find("a").data
-  end
-
-  def test_find_by_value
-    list = LinkedList.new()
-    list.prepend("a")
-    assert_equal "a", list.find("a").data
+    list.append(Node.new("a"))
+    assert_equal "a", list.find_value("a").data
   end
 
   def test_return_head
     list = LinkedList.new
-    list.prepend("a")
-    list.prepend("b")
+    list.append("a")
+    list.append("b")
     head = list.head
-    assert_equal "a", head
+    assert_equal "b", head
   end
 
   def test_return_tail
@@ -64,8 +58,8 @@ class ListTests < Minitest::Test
 
   def test_pop_an_element_from_the_end_of_the_list
     list = LinkedList.new
-    list.prepend("a")
-    list.prepend("b")
+    list.append("a")
+    list.append("b")
     popped = list.pop
     assert_equal "b", popped
   end
@@ -75,6 +69,33 @@ class ListTests < Minitest::Test
     list.prepend("a")
     list.prepend("b")
     assert 2, list.count
+  end
+
+  def test_find_by_value
+    list = LinkedList.new
+    list.append("a")
+    assert_equal "a", list.find_value("a").data
+  end
+
+  def test_remove_by_value
+    list = LinkedList.new
+    list.append("a")
+    list.append("b")
+    assert_equal "b", list.remove_value("b")
+  end
+
+  def test_find_by_index
+    list = LinkedList.new
+    list.append("a")
+    list.append("b")
+    assert_equal "b", list.find_index(1,"b").data
+  end
+
+  def test_remove_by_index
+    list = LinkedList.new
+    list.append("a")
+    list.append("b")
+    assert_equal "b", list.remove_index(1,"b")
   end
 
 end
