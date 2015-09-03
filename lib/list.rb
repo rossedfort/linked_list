@@ -1,51 +1,71 @@
-require_relative 'node'  # => true
+require_relative 'node'
 
 class LinkedList
-  def initialize
-    @head = Node.new  # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>
+
+attr_reader :head
+
+  def empty?
+    @head == nil
   end
 
-  def return_head
-    @head.pointer.data  # => "a"
+  def head
+    @head.next_node.data
   end
 
   def find_tail
-    current = @head              # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>, #<Node:0x007fecd4889e38 @data=nil, @pointer=#<Node:0x007fecd4889a28 @data="a", @pointer=nil>>
-    until current.pointer.nil?   # => true, false, true
-      current = current.pointer  # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
-    end                          # => nil, nil
-    current                      # => #<Node:0x007fecd4889e38 @data=nil, @pointer=nil>, #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
+    current = @head
+    while current.next_node != nil
+      current = current.next_node
+    end
+    current
   end
 
-  def tail_data
+ def tail_data
     find_tail.data
-  end
+ end
 
   def prepend(data)
-    node = Node.new(data)
-    first_node = @head.pointer
-    @head.pointer = node
-    node.pointer = first_node
+    new_node = Node.new(data)
+    new_node.next_node = @head
+    @head = new_node
   end
 
   def append(data)
-    data                          # => "a", "b"
-    new_node = Node.new(data)     # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>, #<Node:0x007fecd4889190 @data="b", @pointer=nil>
-    find_tail.pointer = new_node  # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>, #<Node:0x007fecd4889190 @data="b", @pointer=nil>
+    new_node = Node.new(data)
+    new_node.next_node = @head
+    @head = new_node
   end
 
   def find(data)
     current = Node.new(data)
     while current != nil
       return current if current.data == data
-      current = current.pointer
+      current = current.next_node
     end
     nil
   end
 
- end
+  def count
+    counter = 0
+    while @head != nil
+      @head = @head.next_node
+      counter += 1
+    end
+    counter
+  end
 
-list = LinkedList.new  # => #<LinkedList:0x007fecd4889e60 @head=#<Node:0x007fecd4889e38 @data=nil, @pointer=nil>>
-list.append("a")       # => #<Node:0x007fecd4889a28 @data="a", @pointer=nil>
-list.append("b")       # => #<Node:0x007fecd4889190 @data="b", @pointer=nil>
-list.return_head       # => "a"
+  def pop
+    return nil if empty?
+    popped = @head
+    @head = @head.next_node
+    popped.data
+  end
+
+  def insert(data)
+    node = Node.new(data)
+    first_node = @head.next_node
+    @head.next_node = node
+    node.next_node = first_node
+  end
+
+ end
