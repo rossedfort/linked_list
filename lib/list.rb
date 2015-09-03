@@ -1,8 +1,8 @@
-require_relative 'node'
+require_relative 'node'  # => true
 
 class LinkedList
 
-attr_reader :head
+attr_reader :head  # => nil
 
   def empty?
     @head == nil
@@ -31,9 +31,11 @@ attr_reader :head
   end
 
   def append(data)
-    new_node = Node.new(data)
-    new_node.next_node = @head
-    @head = new_node
+    new_node = Node.new(data)     # => #<Node:0x007fda7b83ae48 @data="a", @next_node=nil>, #<Node:0x007fda7b83a628 @data="b", @next_node=nil>
+    if new_node.next_node == nil  # => true, true
+      @head = new_node            # => #<Node:0x007fda7b83ae48 @data="a", @next_node=nil>, #<Node:0x007fda7b83a628 @data="b", @next_node=nil>
+      new_node.next_node = @head  # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>, #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
+    end                           # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>, #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
   end
 
   def find(data)
@@ -69,3 +71,9 @@ attr_reader :head
   end
 
  end
+
+list = LinkedList.new  # => #<LinkedList:0x007fda7b83af88>
+list.append("a")       # => #<Node:0x007fda7b83ae48 @data="a", @next_node=#<Node:0x007fda7b83ae48 ...>>
+list.append("b")       # => #<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>
+
+list  # => #<LinkedList:0x007fda7b83af88 @head=#<Node:0x007fda7b83a628 @data="b", @next_node=#<Node:0x007fda7b83a628 ...>>>

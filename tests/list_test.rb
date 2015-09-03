@@ -38,14 +38,13 @@ class ListTests < Minitest::Test
   def test_includes?
     list = LinkedList.new
     list.prepend(Node.new("a"))
-    assert_equal "a", list.
+    assert_equal "a", list.find("a").data
   end
 
   def test_find_by_value
     list = LinkedList.new()
     list.prepend("a")
-    found = list.find("a")
-    assert_equal "a", found.data
+    assert_equal "a", list.find("a").data
   end
 
   def test_return_head
@@ -60,7 +59,7 @@ class ListTests < Minitest::Test
     list = LinkedList.new
     list.prepend("a")
     list.prepend("b")
-    assert_equal "b", list.tail.data
+    assert_equal "a", list.find_tail.data
   end
 
   def test_pop_an_element_from_the_end_of_the_list
