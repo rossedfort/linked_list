@@ -5,18 +5,6 @@ require './lib/node'
 
 class ListTests < Minitest::Test
 
-  def test_you_can_create_new_nodes
-    assert Node.new("a")
-  end
-
-  def test_nodes_take_a_paramter
-    assert_equal "a", Node.new("a").data
-  end
-
-  def test_you_can_create_a_nil_head
-    assert_equal nil, Node.new.next_node
-  end
-
   def test_you_can_create_a_list
     assert LinkedList.new
   end
@@ -25,14 +13,26 @@ class ListTests < Minitest::Test
     list = LinkedList.new
     list.append("b")
     list.append("a")
-    assert_equal "a", list.head
+    assert_equal "a", list.head.data
   end
 
-  def test_prepend_add_an_element_at_the_beginning_of_the_list
+  def test_append_a_nil_element_to_the_end_of_the_list
+    list = LinkedList.new
+    list.append(nil)
+    assert_equal nil, list.head.data
+  end
+
+  def test_prepend_an_element_at_the_beginning_of_the_list
     list = LinkedList.new
     list.prepend("b")
     list.prepend("a")
-    assert_equal "b", list.head
+    assert_equal "a", list.head.data
+  end
+
+  def test_prepend_a_nil_element_at_the_beginning_of_the_list
+    list = LinkedList.new
+    list.prepend(nil)
+    assert_equal nil, list.head.data
   end
 
   def test_includes?
@@ -46,7 +46,12 @@ class ListTests < Minitest::Test
     list.append("a")
     list.append("b")
     head = list.head
-    assert_equal "b", head
+    assert_equal "b", list.head.data
+  end
+
+  def test_return_head_if_empty
+    list = LinkedList.new
+    assert_equal nil, list.head
   end
 
   def test_return_tail
@@ -54,6 +59,11 @@ class ListTests < Minitest::Test
     list.prepend("a")
     list.prepend("b")
     assert_equal "a", list.find_tail.data
+  end
+
+  def test_return_tail_if_empty
+    list = LinkedList.new
+    assert_equal nil, list.find_tail
   end
 
   def test_pop_an_element_from_the_end_of_the_list

@@ -9,13 +9,21 @@ attr_reader :head
   end
 
   def head
-    @head.next_node.data
+    if @head != nil
+      @head
+    else
+      nil
+    end
   end
 
   def find_tail
     current = @head
-    while current.next_node != nil
-      current = current.next_node
+    if @head != nil
+      while current.next_node != nil
+        current = current.next_node
+      end
+    else
+      nil
     end
     current
   end
