@@ -3,7 +3,7 @@ Ross Edfort
 Work
 
 Sorting-Suite
-
+__________________________
 * Evaluator: Mike
   * Notes: Good testing, some long methods.
   * Scores:
@@ -12,6 +12,8 @@ Sorting-Suite
     * Ruby Style: 3
     * Organization: 3
 
+Linked List
+__________________________
 * Evaluator: Sean
   * Scores:
     * Functional Expectations: 1
