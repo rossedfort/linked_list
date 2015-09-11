@@ -40,14 +40,19 @@ attr_reader :head
 
   def append(data)
     new_node = Node.new(data)
-    if new_node.next_node == nil
+    if empty?
       @head = new_node
-      new_node.next_node = @head
+    else
+      find_tail.next_node = new_node
     end
   end
 
+  def includes?(data)
+    !find_value(data).nil?
+  end
+
   def find_value(data)
-    current = Node.new(data)
+    current = head
     while current != nil
       return current if current.data == data
       current = current.next_node
@@ -66,8 +71,9 @@ attr_reader :head
 
   def count
     counter = 0
-    while @head != nil
-      @head = @head.next_node
+    current = @head
+    while current != nil
+      current = current.next_node
       counter += 1
     end
     counter
@@ -75,9 +81,7 @@ attr_reader :head
 
   def pop
     return nil if empty?
-    popped = @head
-    @head = @head.next_node
-    popped.data
+
   end
 
   def insert(data)
